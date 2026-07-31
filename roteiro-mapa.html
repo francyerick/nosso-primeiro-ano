@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Roteiro do dia — Mapa</title>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, "Segoe UI", Roboto, sans-serif;
+    background: #14161c;
+    color: #eee;
+    padding: 24px 16px 60px;
+  }
+  h1 {
+    font-size: 1.3rem;
+    margin: 0 0 4px;
+  }
+  .sub {
+    color: #999;
+    font-size: 0.85rem;
+    margin-bottom: 24px;
+  }
+  .stop {
+    background: #1e212a;
+    border: 1px solid #2c2f3a;
+    border-radius: 12px;
+    padding: 16px 18px;
+    margin-bottom: 14px;
+  }
+  .stop-time {
+    color: #d9a441;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    margin-bottom: 2px;
+  }
+  .stop-name {
+    font-size: 1.05rem;
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+  .stop-addr {
+    color: #aaa;
+    font-size: 0.85rem;
+    margin-bottom: 12px;
+    line-height: 1.4;
+  }
+  .stop-note {
+    color: #888;
+    font-size: 0.78rem;
+    margin-top: 6px;
+    font-style: italic;
+  }
+  a.waze-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #33ccff;
+    color: #0a1a22;
+    font-weight: 700;
+    font-size: 0.9rem;
+    padding: 9px 16px;
+    border-radius: 8px;
+    text-decoration: none;
+  }
+  a.waze-btn:active { opacity: 0.8; }
+</style>
+</head>
+<body>
+
+<h1>Roteiro do dia — 01/08/2026</h1>
+<div class="sub">Toca em "Abrir no Waze" pra já sair navegando pro próximo local.</div>
+
+<div id="list"></div>
+
+<script>
+var stops = [
+  {
+    time: "8h45 → 9h",
+    name: "Café Fiori — café da manhã",
+    address: "Av. T-9, 2335 - Jardim América, Goiânia - GO, 74255-220",
+    note: null
+  },
+  {
+    time: "10h45 → 11h",
+    name: "Glow Park — cama elástica (1h)",
+    address: "Av. T-2, 649 - Setor Bueno, Goiânia - GO",
+    note: "Ingresso já precisa estar comprado em glowpark.com.br"
+  },
+  {
+    time: "13h45 → 14h",
+    name: "Parque Flamboyant",
+    address: "R. 15, 103-157 - Jardim Goiás, Goiânia - GO, 74810-080",
+    note: null
+  },
+  {
+    time: "17h15 → 17h30",
+    name: "Grá Rooftop — pôr do sol + jantar",
+    address: "Av. Portugal, 1148 - Setor Marista, Goiânia - GO, 74150-030",
+    note: "40º andar, Órion Complex — reserva feita para 17h30"
+  },
+  {
+    time: "20h45 → 21h",
+    name: "Mont Blanc — fechamento da noite",
+    address: "BR-153, QD 77a - Lt 26e - Vila Brasília, Aparecida de Goiânia - GO, 74912-650",
+    note: "Ligar antes confirmando disponibilidade de sábado à noite"
+  }
+];
+
+var list = document.getElementById('list');
+stops.forEach(function(s) {
+  var div = document.createElement('div');
+  div.className = 'stop';
+  var wazeUrl = 'https://waze.com/ul?q=' + encodeURIComponent(s.address) + '&navigate=yes';
+  div.innerHTML =
+    '<div class="stop-time">' + s.time + '</div>' +
+    '<div class="stop-name">' + s.name + '</div>' +
+    '<div class="stop-addr">' + s.address + '</div>' +
+    '<a class="waze-btn" href="' + wazeUrl + '" target="_blank" rel="noopener">Abrir no Waze</a>' +
+    (s.note ? '<div class="stop-note">' + s.note + '</div>' : '');
+  list.appendChild(div);
+});
+</script>
+
+</body>
+</html>
